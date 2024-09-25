@@ -1,0 +1,20 @@
+- pipeline: "firstTest"
+  events:
+  - type: "PUSH"
+    refs:
+    - "refs/heads/main"
+  fail_on_prepare_env_warning: true
+  trigger_conditions:
+  - trigger_condition: "SUCCESS_PIPELINE"
+    trigger_project_name: "express-ci-cd-demo"
+    trigger_pipeline_name: "firstTest"
+  actions:
+  - action: "npm test"
+    type: "BUILD"
+    docker_image_name: "library/node"
+    docker_image_tag: "22"
+    execute_commands:
+    - "# yarn install"
+    - "npm install"
+    - "npm test"
+    shell: "BASH"
